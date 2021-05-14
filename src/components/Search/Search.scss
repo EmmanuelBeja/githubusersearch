@@ -1,0 +1,18 @@
+.search-section {
+  padding: 50px 50px 20px 50px;
+
+  .form-control {
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .input-group-append {
+    button {
+      border-left: none;
+      border-radius: 0px 5px 5px 0px;
+      border-color: #ced4da;
+    }
+  }
+}
