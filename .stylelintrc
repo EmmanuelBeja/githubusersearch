@@ -1,0 +1,33 @@
+{
+  "extends": [
+    "stylelint-prettier/recommended"
+  ],
+  "rules": {
+    "prettier/prettier": true,
+
+    "rule-empty-line-before": [
+      "always-multi-line",
+      {
+        "except": [
+          "first-nested"
+        ],
+        "ignore": [
+          "after-comment"
+        ]
+      }
+    ],
+    "at-rule-empty-line-before": [
+      "always",
+      {
+        "except": [
+          "after-same-name",
+          "first-nested",
+        ],
+        "ignore": [
+          "after-comment"
+        ],
+        "ignoreAtRules": ["for", "else"]
+      }
+    ]
+  }
+}

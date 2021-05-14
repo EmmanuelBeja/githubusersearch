@@ -1,0 +1,5 @@
+#ignore artifacts
+.cache
+.vscode
+public
+node_modules
