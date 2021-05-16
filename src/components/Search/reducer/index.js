@@ -1,7 +1,9 @@
-import * as types from './actionTypes'
+import * as types from '../actions/actionTypes'
 
 const initialState = {
-  results: {},
+  login: '',
+  results: [],
+  totalCount: 0,
   loading: false,
   errors: undefined,
 }
@@ -11,13 +13,17 @@ const searchReducer = (state = initialState, action) => {
     case types.GET_SEARCH_RESULTS_REQUEST:
       return {
         ...state,
+        results: [],
+        totalCount: 0,
         loading: true,
       }
 
     case types.GET_SEARCH_RESULTS_SUCCESS:
       return {
         ...state,
-        results: action.data,
+        login: action.data.login,
+        results: action.data.items,
+        totalCount: action.data.total_count,
         loading: false,
       }
 
@@ -25,7 +31,7 @@ const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        errors: action.data,
+        errors: action.error,
       }
 
     default:
