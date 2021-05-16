@@ -5,10 +5,10 @@ This is a simple application search and display data
 - React
 - React-Redux
 - reactstrap
-- framer-motion
+- react-bootstrap-table-next
+- react-toastify
 - font-awesome
 - node-sass
-- react-tooltip
 - eslint
 
 ### Setup Requirements

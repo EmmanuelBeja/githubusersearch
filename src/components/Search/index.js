@@ -5,21 +5,20 @@ import { Row, Col, InputGroup, InputGroupAddon, Input, Button } from 'reactstrap
 import { faSearch, faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { toast } from 'react-toastify'
+import RecentSearches from './RecentSearches'
 
+import { rowsPerPage, defaultPage } from '../Results/tableOptions'
 import { searchActions } from './actions'
 
 import './Search.scss'
 
 const Search = () => {
   const dispatch = useDispatch()
-  const { errors, loading } = useSelector((state) => state.search)
+  const { loading } = useSelector((state) => state.search)
 
   const [login, setLogin] = useState('')
-  const [inputError, setInputError] = useState('')
-
-  useEffect(() => {
-    errors && toast.error(errors)
-  }, [errors])
+  const [inputError, setInputError] = useState(false)
+  const [searches, setSearches] = useState([])
 
   useEffect(() => {
     login && setInputError(false)
@@ -31,7 +30,17 @@ const Search = () => {
       toast.error('Please type something to search')
       return
     }
-    dispatch(searchActions.getSearchResults(login))
+    // add searched item to recent searches
+    const updatedSearches = searches
+    updatedSearches.push(login)
+    setSearches(updatedSearches)
+
+    dispatch(searchActions.getSearchResults({ login, page: defaultPage, rowsPerPage }))
+  }
+
+  const handleClickRecent = (item) => {
+    dispatch(searchActions.getSearchResults({ login: item, page: defaultPage, rowsPerPage }))
+    setLogin(item)
   }
 
   return (
@@ -44,6 +53,11 @@ const Search = () => {
         className="search-section"
       >
         <InputGroup>
+          <InputGroupAddon addonType="prepend">
+            <Button onClick={() => handleSearch()} outline disabled={loading}>
+              <FontAwesomeIcon icon={faSearch} />
+            </Button>
+          </InputGroupAddon>
           <Input
             className="form-control"
             name="login"
@@ -51,16 +65,15 @@ const Search = () => {
             value={login}
             onChange={(e) => setLogin(e.target.value)}
             invalid={inputError}
+            autoComplete="off"
           />
           <InputGroupAddon addonType="append">
             <Button onClick={() => handleSearch()} outline disabled={loading}>
-              {loading ? (
-                <FontAwesomeIcon icon={faCircleNotch} pulse />
-              ) : (
-                <FontAwesomeIcon icon={faSearch} />
-              )}
+              {loading ? <FontAwesomeIcon icon={faCircleNotch} pulse /> : 'Submit'}
             </Button>
           </InputGroupAddon>
+
+          <RecentSearches searches={searches} handleClick={handleClickRecent} />
         </InputGroup>
       </Col>
     </Row>
