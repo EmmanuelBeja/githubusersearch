@@ -21,7 +21,8 @@
     "react/jsx-uses-vars": "error"
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "jest": true
   },
   "parser": "babel-eslint",
   "parserOptions": {
