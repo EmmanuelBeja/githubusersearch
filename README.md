@@ -1,7 +1,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f88c93b7-af67-49a1-927f-45eef90729fb/deploy-status)](https://app.netlify.com/sites/emmanuelbeja-search/deploys)
 
-## Search
-This is a simple application search and display data
+## Github User Search
+This is a simple application search and display Github User data
 
 ### Tools Used
 - React
