@@ -52,7 +52,10 @@
     ]
   },
   "devDependencies": {
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2",
     "eslint": "^7.11.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-config-standard": "14.1.1",
@@ -84,6 +87,18 @@
     "*.scss": [
       "prettier --write --parser \"scss\" --loglevel error",
       "stylelint --fix"
+    ]
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js"
+    ],
+    "coverageReporters": [
+      "text"
     ]
   }
 }
