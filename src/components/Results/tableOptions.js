@@ -1,53 +1,70 @@
 import React from 'react'
 
-import { faSort, faSortAlphaUp, faSortAlphaDown } from '@fortawesome/free-solid-svg-icons'
+import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { faSort } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // custom carret to indicate sorting state
 const sortCaret = (order, column) => {
-  if (!order)
-    return (
-      <>
-        &nbsp;
-        <FontAwesomeIcon icon={faSort} />
-      </>
-    )
-  else if (order === 'asc')
-    return (
-      <>
-        &nbsp;
-        <FontAwesomeIcon icon={faSortAlphaUp} />
-      </>
-    )
-  else if (order === 'desc')
-    return (
-      <>
-        &nbsp;
-        <FontAwesomeIcon icon={faSortAlphaDown} />
-      </>
-    )
-  return null
+  return (
+    <>
+      &nbsp;
+      <FontAwesomeIcon icon={faSort} />
+    </>
+  )
+}
+
+const avatarFormatter = (cell, row) => {
+  const handleRedirectToUserGithub = () => {
+    window.open(row.html_url)
+  }
+
+  return (
+    <div className="avatar-container" onMouseDown={() => handleRedirectToUserGithub()}>
+      <img src={cell} className="avatar" alt={row.login} />
+    </div>
+  )
+}
+
+const actionsFormatter = (cell, row) => {
+  const handleRedirect = (url) => window.open(url)
+
+  return (
+    <UncontrolledDropdown>
+      <DropdownToggle caret>Actions</DropdownToggle>
+      <DropdownMenu>
+        <DropdownItem onMouseDown={() => handleRedirect(row.html_url)}>Profile</DropdownItem>
+        <DropdownItem onMouseDown={() => handleRedirect(`${row.html_url}?tab=repositories`)}>
+          Repositories
+        </DropdownItem>
+      </DropdownMenu>
+    </UncontrolledDropdown>
+  )
 }
 
 // columns settings
 const columns = [
   {
     dataField: 'avatar_url',
-    text: 'Avatar URL',
-    sort: true,
-    sortCaret: (order, column) => sortCaret(order, column),
+    text: 'Avatar',
+    formatter: avatarFormatter,
   },
   {
     dataField: 'login',
-    text: 'Login',
+    text: 'User Name',
     sort: true,
     sortCaret: (order, column) => sortCaret(order, column),
   },
   {
     dataField: 'type',
-    text: 'Type',
+    text: 'Account Type',
     sort: true,
     sortCaret: (order, column) => sortCaret(order, column),
+  },
+  {
+    dataField: '',
+    text: 'Actions',
+    formatter: actionsFormatter,
   },
 ]
 
@@ -55,6 +72,10 @@ const columns = [
 const defaultSorted = [
   {
     dataField: 'login',
+    order: 'desc',
+  },
+  {
+    dataField: 'type',
     order: 'desc',
   },
 ]
