@@ -57,20 +57,26 @@ const Paginator = ({ options }) => {
       </Col>
       <Col lg="4" md="4" sm="12" xs="12" className="pagination-buttons">
         <ButtonGroup>
-          <Button
-            color="primary"
-            outline
-            className={page === 1 ? 'd-none' : ''}
-            onClick={() => {
-              onPageChange(page - 1)
-              setDirection('Previous')
-            }}
-          >
-            Previous
-          </Button>
+          {page !== 1 && (
+            <Button
+              color="info"
+              outline
+              size="sm"
+              className={page === 1 ? 'd-none' : ''}
+              onClick={() => {
+                onPageChange(page - 1)
+                setDirection('Previous')
+              }}
+            >
+              Previous
+            </Button>
+          )}
+
           {buttonStack.map((item, index) => (
             <Button
-              color="primary"
+              color="info"
+              outline
+              size="sm"
               outline={page !== item}
               onClick={() => {
                 onPageChange(item)
@@ -81,17 +87,22 @@ const Paginator = ({ options }) => {
               {item}
             </Button>
           ))}
-          <Button
-            color="primary"
-            outline
-            className={page === 1 && totalCount < 9 ? 'd-none' : ''}
-            onClick={() => {
-              onPageChange(page + 1)
-              setDirection('Next')
-            }}
-          >
-            Next
-          </Button>
+
+          {page === 1 && totalCount < 5 ? (
+            ''
+          ) : (
+            <Button
+              color="info"
+              outline
+              size="sm"
+              onClick={() => {
+                onPageChange(page + 1)
+                setDirection('Next')
+              }}
+            >
+              Next
+            </Button>
+          )}
         </ButtonGroup>
       </Col>
     </Row>
