@@ -1,19 +1,49 @@
-.table-wrapper__custom {
-  background-color: #58b89514;
-  border-style: hidden !important;
+.react-bootstrap-table {
+  border-radius: 5px;
+
+  .table-header-wrapper__custom {
+    border-bottom: 1px solid whitesmoke;
+  }
+
+  tr,
+  td,
+  th {
+    border: none !important;
+  }
+
+  .react-bs-table-no-data {
+    border-bottom-width: 0px !important;
+  }
+
+  .table-empty {
+    height: 100px;
+    margin-top: 50px;
+  }
+
+  .avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
 }
 
-.react-bs-table-no-data {
-  border-bottom-width: 0px !important;
+.pagination-buttons {
+  display: flex;
+  justify-content: flex-end;
+
+  @media only screen and (max-width: 576px) {
+    display: block;
+  }
 }
 
-.table-empty {
-  height: 100px;
-  margin-top: 50px;
+.btn-outline-info {
+  border: none;
+
+  &:hover {
+    color: white;
+  }
 }
 
-.avatar {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
+.btn-info {
+  color: white;
 }

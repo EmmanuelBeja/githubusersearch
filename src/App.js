@@ -16,7 +16,11 @@ const App = () => {
       <Container className="app-container">
         <Row>
           <Col lg="12" md="12" sm="12" xs="12" className="header">
-            <img src="/images/welcome.svg" className="header-image" alt="welcome" />
+            <img
+              src="https://i.pinimg.com/originals/28/02/00/28020003d4a493c78d8202ba6c35f179.gif"
+              className="header-image"
+              alt="github octocat"
+            />
           </Col>
         </Row>
         <Search />

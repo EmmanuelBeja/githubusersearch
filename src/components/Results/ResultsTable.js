@@ -33,11 +33,11 @@ const ResultsTable = (props) => {
         keyField="avatar_url"
         data={results}
         columns={columns}
-        headerWrapperClasses="table-wrapper__custom"
+        headerWrapperClasses="table-header-wrapper__custom"
         defaultSorted={defaultSorted}
         noDataIndication={noDataIndication}
         bordered={false}
-        wrapperClasses="table-responsive table-hover"
+        wrapperClasses="table-responsive table-hover shadow p-3 mb-2 bg-white rounded"
       />
       <Paginator
         options={{

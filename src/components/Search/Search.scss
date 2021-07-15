@@ -4,14 +4,13 @@
   padding: 20px 50px;
 
   .input-group {
-    width: 95%;
+    width: 90%;
     transition: all 0.4s;
     border: 1px solid #ced4da;
-    border-radius: 7px;
-    padding: 5px;
+    border-radius: 5px;
 
     &:focus-within {
-      width: 100%;
+      width: 95%;
 
       .autocomplete {
         display: block;
@@ -20,11 +19,12 @@
     }
 
     &-prepend {
-      button {
-        border: transparent;
-        border-radius: 7px 0px 0px 7px;
-        background-color: #3f51b514;
-      }
+      background-color: #3f51b514;
+      border-radius: 5px 0px 0px 5px !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
     }
 
     .search__autocomplete > .autocomplete {

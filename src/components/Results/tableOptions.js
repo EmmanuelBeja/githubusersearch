@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
-import { faSort } from '@fortawesome/free-solid-svg-icons'
+import { Button } from 'reactstrap'
+import { faSort, faIdCard, faClipboardList } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // custom carret to indicate sorting state
@@ -14,14 +14,14 @@ const sortCaret = (order, column) => {
   )
 }
 
-const avatarFormatter = (cell, row) => {
+const userFormatter = (cell, row) => {
   const handleRedirectToUserGithub = () => {
     window.open(row.html_url)
   }
 
   return (
     <div className="avatar-container" onMouseDown={() => handleRedirectToUserGithub()}>
-      <img src={cell} className="avatar" alt={row.login} />
+      <img src={row.avatar_url} className="avatar" alt={row.login} /> {row.login}
     </div>
   )
 }
@@ -30,28 +30,40 @@ const actionsFormatter = (cell, row) => {
   const handleRedirect = (url) => window.open(url)
 
   return (
-    <UncontrolledDropdown>
-      <DropdownToggle caret>Actions</DropdownToggle>
-      <DropdownMenu>
-        <DropdownItem onMouseDown={() => handleRedirect(row.html_url)}>Profile</DropdownItem>
-        <DropdownItem onMouseDown={() => handleRedirect(`${row.html_url}?tab=repositories`)}>
-          Repositories
-        </DropdownItem>
-      </DropdownMenu>
-    </UncontrolledDropdown>
+    <>
+      <Button color="info" outline size="sm" onClick={() => handleRedirect(row.html_url)}>
+        <FontAwesomeIcon icon={faIdCard} /> Profile
+      </Button>{' '}
+      <Button
+        color="info"
+        outline
+        size="sm"
+        onClick={() => handleRedirect(`${row.html_url}?tab=repositories`)}
+      >
+        <FontAwesomeIcon icon={faClipboardList} /> Repositories
+      </Button>
+    </>
   )
 }
 
 // columns settings
 const columns = [
   {
-    dataField: 'avatar_url',
-    text: 'Avatar',
-    formatter: avatarFormatter,
+    dataField: 'login',
+    text: 'User',
+    sort: true,
+    sortCaret: (order, column) => sortCaret(order, column),
+    formatter: userFormatter,
   },
   {
-    dataField: 'login',
-    text: 'User Name',
+    dataField: 'score',
+    text: 'Score',
+    sort: true,
+    sortCaret: (order, column) => sortCaret(order, column),
+  },
+  {
+    dataField: 'site_admin',
+    text: 'Administrator',
     sort: true,
     sortCaret: (order, column) => sortCaret(order, column),
   },
@@ -90,7 +102,7 @@ const noDataIndication = () => {
   )
 }
 
-const rowsPerPage = 9
+const rowsPerPage = 5
 
 const defaultPage = 1
 
